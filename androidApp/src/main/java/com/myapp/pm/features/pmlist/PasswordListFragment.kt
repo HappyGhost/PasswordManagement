@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.myapp.pm.R
 import com.myapp.pm.features.pmlist.adapter.PasswordAdapter
 import com.myapp.pm.features.pmlist.adapter.placeholder.PlaceholderContent
+import com.myapp.pm.databinding.FragmentPasswordListBinding
 
 /**
  * A fragment representing a list of Items.
@@ -31,19 +30,17 @@ class PasswordListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_password_list, container, false)
+        val binding = FragmentPasswordListBinding.inflate(inflater, container, false)
 
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = PasswordAdapter(PlaceholderContent.ITEMS)
+        with(binding.list) {
+            layoutManager = when {
+                columnCount <= 1 -> LinearLayoutManager(context)
+                else -> GridLayoutManager(context, columnCount)
             }
+            adapter = PasswordAdapter(PlaceholderContent.ITEMS)
         }
-        return view
+        return binding.root
     }
 
     companion object {
