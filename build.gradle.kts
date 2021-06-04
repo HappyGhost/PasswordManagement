@@ -2,7 +2,6 @@ buildscript {
     val kotlin_version by extra("1.5.0")
     repositories {
         gradlePluginPortal()
-        jcenter()
         google()
         mavenCentral()
     }
@@ -15,7 +14,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
     }
 }

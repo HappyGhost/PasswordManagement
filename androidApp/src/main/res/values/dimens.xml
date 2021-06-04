@@ -2,4 +2,15 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <!-- common spacing -->
+    <dimen name="spacing_item_left_right">10dp</dimen>
+    <dimen name="spacing_content_left_right">16dp</dimen>
+
+    <!-- item password -->
+    <dimen name="item_password_layout_height">85dp</dimen>
+    <dimen name="item_password_avatar_width_height">40dp</dimen>
+    <dimen name="item_account_name_margin_left">5dp</dimen>
+    <dimen name="item_spacing_between_items">3dp</dimen>
+    <dimen name="item_account_value_margin_left">10dp</dimen>
 </resources>

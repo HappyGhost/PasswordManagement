@@ -6,4 +6,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Text style -->
+    <style name="TextHeader1">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextLabel1">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextContent1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
