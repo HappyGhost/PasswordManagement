@@ -1,0 +1,11 @@
+androidApp/build
+shared/build
+.idea
+*.iml
+.gradle
+gradle/
+/local.properties
+.DS_Store
+
+gradlew.bat
+gradlew
