@@ -9,5 +9,9 @@
             android:id="@+id/passwordListFragment"
             android:name="com.myapp.pm.features.pmlist.PasswordListFragment"
             android:label="fragment_password_list"
-            tools:layout="@layout/fragment_password_list" />
+            tools:layout="@layout/fragment_password_list" >
+        <action
+            android:id="@+id/action_passwordListFragment_to_addPasswordFragment"
+            app:destination="@id/addPasswordFragment" />
+    </fragment>
 </navigation>
