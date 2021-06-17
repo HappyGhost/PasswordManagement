@@ -1,4 +1,11 @@
 <resources>
     <string name="fragment_list_menu_add_password_label">Add password</string>
     <string name="fragment_list_menu_setting_label">Setting</string>
+
+    <!-- Add password screen -->
+    <string name="fragment_ap_account_name_hint">Account Name</string>
+    <string name="fragment_ap_username_hint">Username</string>
+    <string name="fragment_ap_password_hint">Password</string>
+    <string name="fragment_ap_hint">Hint</string>
+    <string name="fragment_ap_btn_add_text">Add</string>
 </resources>

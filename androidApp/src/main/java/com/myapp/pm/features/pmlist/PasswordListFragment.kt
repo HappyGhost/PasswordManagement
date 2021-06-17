@@ -45,8 +45,8 @@ class PasswordListFragment : Fragment() {
         }
 
         viewModel.liveData.observe(viewLifecycleOwner, { it ->
-            adapter.source = it.map { it.toPasswordUiModel() }
-            adapter.notifyDataSetChanged()
+            passwordAdapter.source = it.map { it.toPasswordUiModel() }
+            passwordAdapter.notifyDataSetChanged()
 
         })
 
