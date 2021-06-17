@@ -2,59 +2,58 @@ package com.myapp.pm.features.pmlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.myapp.pm.R
 import com.myapp.pm.features.pmlist.adapter.PasswordAdapter
-import com.myapp.pm.features.pmlist.adapter.placeholder.PlaceholderContent
 import com.myapp.pm.databinding.FragmentPasswordListBinding
+import com.myapp.pm.features.pmlist.adapter.toPasswordUiModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A fragment representing a list of Items.
  */
 class PasswordListFragment : Fragment() {
 
-    private var columnCount = 1
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
+    private lateinit var binding: FragmentPasswordListBinding
+    private val viewModel: PasswordListViewModel by viewModel()
+    private val passwordAdapter = PasswordAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPasswordListBinding.inflate(inflater, container, false)
-
-        // Set the adapter
-        with(binding.list) {
-            layoutManager = when {
-                columnCount <= 1 -> LinearLayoutManager(context)
-                else -> GridLayoutManager(context, columnCount)
-            }
-            adapter = PasswordAdapter(PlaceholderContent.ITEMS)
-        }
+        binding = FragmentPasswordListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+    private fun initView() {
+        with(binding.list) {
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            adapter = passwordAdapter
+        }
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            PasswordListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
+        viewModel.liveData.observe(viewLifecycleOwner, { it ->
+            adapter.source = it.map { it.toPasswordUiModel() }
+            adapter.notifyDataSetChanged()
+
+        })
+
+        viewModel.getPasswordList()
+
+        binding.menuItemAddPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_passwordListFragment_to_addPasswordFragment)
+        }
     }
 }

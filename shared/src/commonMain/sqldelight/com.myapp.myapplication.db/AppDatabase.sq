@@ -1,0 +1,22 @@
+CREATE TABLE PasswordEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    accountName TEXT NOT NULL,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    hint TEXT
+);
+
+insertPassword:
+INSERT INTO PasswordEntity(accountName, username, password, hint)
+VALUES(?,?,?,?);
+
+selectAllPassword:
+SELECT * FROM PasswordEntity;
+
+selectPassword:
+SELECT * FROM PasswordEntity
+WHERE rowid = ?;
+
+deletePassword:
+DELETE FROM PasswordEntity
+WHERE rowid = ?;
