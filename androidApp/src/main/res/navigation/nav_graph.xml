@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_passwordListFragment_to_addPasswordFragment"
             app:destination="@id/addPasswordFragment" />
+        <action
+            android:id="@+id/action_passwordListFragment_to_passwordDetailFragment"
+            app:destination="@id/passwordDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPasswordFragment"
         android:name="com.myapp.pm.features.add.AddPasswordFragment"
         android:label="fragment_add_password"
         tools:layout="@layout/fragment_add_password" />
+    <fragment
+        android:id="@+id/passwordDetailFragment"
+        android:name="com.myapp.pm.features.detail.PasswordDetailFragment"
+        android:label="PasswordDetailFragment" />
 </navigation>

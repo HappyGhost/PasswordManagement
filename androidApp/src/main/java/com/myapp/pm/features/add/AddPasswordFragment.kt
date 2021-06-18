@@ -29,7 +29,7 @@ class AddPasswordFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddPasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
