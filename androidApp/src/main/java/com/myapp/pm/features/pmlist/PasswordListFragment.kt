@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.myapp.pm.R
 import com.myapp.pm.features.pmlist.adapter.PasswordAdapter
 import com.myapp.pm.databinding.FragmentPasswordListBinding
+import com.myapp.pm.features.SharedViewModel
 import com.myapp.pm.features.pmlist.adapter.toPasswordUiModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,6 +24,7 @@ class PasswordListFragment : Fragment() {
 
     private lateinit var binding: FragmentPasswordListBinding
     private val viewModel: PasswordListViewModel by viewModel()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val passwordAdapter = PasswordAdapter()
 
     override fun onCreateView(
@@ -42,6 +45,10 @@ class PasswordListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             adapter = passwordAdapter
+            passwordAdapter.onItemClick = {
+                sharedViewModel.passwordUiModel = it
+                findNavController().navigate(R.id.action_passwordListFragment_to_passwordDetailFragment)
+            }
         }
 
         viewModel.liveData.observe(viewLifecycleOwner, { it ->

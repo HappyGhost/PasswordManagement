@@ -11,6 +11,7 @@ import com.myapp.pm.databinding.ItemPasswordBinding
 class PasswordAdapter : RecyclerView.Adapter<PasswordAdapter.ViewHolder>() {
 
     var source = listOf<PasswordUiModel>()
+    var onItemClick: ((item: PasswordUiModel) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
@@ -25,6 +26,9 @@ class PasswordAdapter : RecyclerView.Adapter<PasswordAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = source[position]
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(item)
+        }
         holder.tvAccountName.text = item.accountName
         holder.tvUserName.text = item.username
         holder.tvPassHint.text = item.passHint
@@ -48,9 +52,10 @@ data class PasswordUiModel(
     val id: Long,
     val accountName: String,
     val username: String,
+    val password: String,
     val passHint: String
 )
 
 fun PasswordEntity.toPasswordUiModel(): PasswordUiModel {
-    return PasswordUiModel(id, accountName, username, hint)
+    return PasswordUiModel(id, accountName, username, password, hint)
 }
