@@ -18,4 +18,8 @@
     <!-- Add password -->
     <dimen name="add_password_btn_add_margin_top">30dp</dimen>
 
+    <!-- Detail -->
+    <dimen name="password_detail_eye_icon_width_height">32dp</dimen>
+    <dimen name="password_detail_eye_icon_margin_right">10dp</dimen>
+
 </resources>

@@ -20,3 +20,12 @@ WHERE rowid = ?;
 deletePassword:
 DELETE FROM PasswordEntity
 WHERE rowid = ?;
+
+updatePassword:
+UPDATE PasswordEntity
+SET accountName = ?,
+    username = ?,
+    password = ?,
+    hint = ?
+WHERE rowid = ?;
+

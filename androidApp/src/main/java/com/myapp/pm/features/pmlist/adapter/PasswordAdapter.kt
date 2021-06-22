@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.myapp.myapplication.db.entity.PasswordEntity
 
 import com.myapp.pm.databinding.ItemPasswordBinding
+import com.myapp.pm.features.uimodel.PasswordUiModel
 
 class PasswordAdapter : RecyclerView.Adapter<PasswordAdapter.ViewHolder>() {
 
@@ -46,16 +47,4 @@ class PasswordAdapter : RecyclerView.Adapter<PasswordAdapter.ViewHolder>() {
             return super.toString() + " '" + tvAccountName.text + "'"
         }
     }
-}
-
-data class PasswordUiModel(
-    val id: Long,
-    val accountName: String,
-    val username: String,
-    val password: String,
-    val passHint: String
-)
-
-fun PasswordEntity.toPasswordUiModel(): PasswordUiModel {
-    return PasswordUiModel(id, accountName, username, password, hint)
 }
