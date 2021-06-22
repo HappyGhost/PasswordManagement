@@ -8,10 +8,10 @@ interface IGetPasswordsUseCase {
     suspend fun execute() : List<PasswordEntity>
 }
 
-class GetPasswordsUseCaseImpl(val repository: LocalDatabaseRepository) : IGetPasswordsUseCase {
+class GetPasswordsUseCaseImpl(private val dbRepository: LocalDatabaseRepository) : IGetPasswordsUseCase {
 
     @Throws(Exception::class)
     override suspend fun execute() : List<PasswordEntity> {
-        return repository.getAllPassword()
+        return dbRepository.getAllPassword()
     }
 }

@@ -26,4 +26,10 @@ class LocalDatabaseRepository(driverFactory: DatabaseDriverFactory) {
     internal fun deletePassword(rowId: Long) {
         dbQuery.deletePassword(rowId)
     }
+
+    internal fun updatePassword(entity: PasswordEntity){
+        with(entity){
+            dbQuery.updatePassword(accountName, username, password, hint, id)
+        }
+    }
 }
