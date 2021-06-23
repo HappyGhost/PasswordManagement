@@ -15,7 +15,8 @@ val appModule = module {
     single<IGetPasswordsUseCase> { GetPasswordsUseCaseImpl(get()) }
     single<IAddPasswordUseCase> { AddPasswordUseCaseImpl(get()) }
     single<IUpdatePasswordUseCase> { UpdatePasswordUseCaseImpl(get()) }
+    single<IDeletePasswordUseCase> { DeletePasswordUseCaseImpl(get()) }
     viewModel { PasswordListViewModel(get()) }
     viewModel { AddPasswordViewModel(get()) }
-    viewModel { PasswordDetailViewModel(get()) }
+    viewModel { PasswordDetailViewModel(get(), get()) }
 }

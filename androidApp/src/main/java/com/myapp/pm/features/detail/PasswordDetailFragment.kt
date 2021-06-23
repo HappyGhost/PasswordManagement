@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.myapp.pm.R
 import com.myapp.pm.core.BaseFragment
 import com.myapp.pm.databinding.FragmentDetailBinding
@@ -49,6 +50,15 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
                 updateUiBehavior()
             } else {
                 Toast.makeText(activity, "Update fail", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        detailViewModel.deletePasswordLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isSuccess) {
+                Toast.makeText(activity, "Delete successfully", Toast.LENGTH_LONG).show()
+                findNavController().navigateUp()
+            } else {
+                Toast.makeText(activity, "Delete fail", Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -120,7 +130,7 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
                 displayMode = DisplayMode.EDIT_MODE
                 updateUiBehavior()
             }
-            R.id.menu_delete -> Log.d("tag", "delete clicked")
+            R.id.menu_delete -> detailViewModel.deletePassword(sharedViewModel.passwordUiModel!!.id)
         }
         return super.onOptionsItemSelected(item)
     }

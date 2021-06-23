@@ -7,7 +7,7 @@ interface IUpdatePasswordUseCase{
     suspend fun execute(entity: PasswordEntity)
 }
 
-class UpdatePasswordUseCaseImpl(val dbRepository: LocalDatabaseRepository): IUpdatePasswordUseCase {
+class UpdatePasswordUseCaseImpl(private val dbRepository: LocalDatabaseRepository): IUpdatePasswordUseCase {
     override suspend fun execute(entity: PasswordEntity) {
         dbRepository.updatePassword(entity)
     }
