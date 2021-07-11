@@ -4,31 +4,22 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="buttonStyle">@style/AppTheme.button</item>
-        <item name="editTextStyle">@style/AppTheme.inputText</item>
+        <item name="buttonStyle">@style/AppTheme.Button</item>
+        <item name="editTextStyle">@style/AppTheme.InputText</item>
     </style>
 
-    <style name="AppTheme.button" parent="Widget.AppCompat.Button">
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
         <item name="backgroundTint">@color/colorSecondary</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="AppTheme.inputText" parent="Widget.AppCompat.EditText">
+    <style name="AppTheme.InputText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/selector_edit_text_color</item>
     </style>
 
     <!-- Text style -->
-    <style name="TextHeader1">
-        <item name="android:textSize">18sp</item>
+    <style name="ClickableText">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">5dp</item>
     </style>
-
-    <style name="TextLabel1">
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="TextContent1">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
 </resources>

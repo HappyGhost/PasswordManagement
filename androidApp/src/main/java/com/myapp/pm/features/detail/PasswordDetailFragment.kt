@@ -2,7 +2,6 @@ package com.myapp.pm.features.detail
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -68,28 +67,28 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
         binding.btnUpdate.setOnClickListener {
             detailViewModel.updatePassword(
                 sharedViewModel.passwordUiModel!!.id,
-                binding.tvAccountName.text.toString(),
-                binding.tvUsername.text.toString(),
-                binding.tvPassword.text.toString(),
-                binding.tvHint.text.toString()
+                binding.edtAccountName.text.toString(),
+                binding.edtUsername.text.toString(),
+                binding.edtPassword.text.toString(),
+                binding.edtHint.text.toString()
             )
         }
         binding.imgShowPassword.setOnClickListener {
             it.isSelected = !it.isSelected
             if (it.isSelected) {
-                binding.tvPassword.transformationMethod = null
+                binding.edtPassword.transformationMethod = null
             } else {
-                binding.tvPassword.transformationMethod = PasswordTransformationMethod()
+                binding.edtPassword.transformationMethod = PasswordTransformationMethod()
             }
         }
     }
 
     private fun showPasswordInfoFromShareModel() {
         sharedViewModel.passwordUiModel?.let {
-            binding.tvAccountName.setText(it.accountName)
-            binding.tvUsername.setText(it.username)
-            binding.tvPassword.setText(it.password)
-            binding.tvHint.setText(it.passHint)
+            binding.edtAccountName.setText(it.accountName)
+            binding.edtUsername.setText(it.username)
+            binding.edtPassword.setText(it.password)
+            binding.edtHint.setText(it.passHint)
         }
     }
 

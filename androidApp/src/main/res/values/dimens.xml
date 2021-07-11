@@ -3,6 +3,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <!-- Text size -->
+    <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_description">16sp</dimen>
     <!-- common spacing -->
     <dimen name="spacing_item_left_right">10dp</dimen>
     <dimen name="spacing_content_left_right">16dp</dimen>
