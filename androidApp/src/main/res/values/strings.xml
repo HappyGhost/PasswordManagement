@@ -18,4 +18,22 @@
     <!-- Menu -->
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+
+    <!-- Setting -->
+    <string name="setting_title">Setting</string>
+    <string name="setting_security_check_title">Enable security check</string>
+    <string name="setting_security_check_description">You will be asked inputting primary password if you want to view password.</string>
+    <string name="setting_change_text">Change</string>
+    <string name="setting_save_password_text">Save</string>
+    <string name="setting_primary_password_text">Primary Password</string>
+
+    <!-- Dialog -->
+    <string name="btn_confirm">Confirm</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <!-- Confirm Dialog -->
+    <string name="dialog_confirm_primary_password_hint">Primary Password</string>
+    <string name="dialog_confirm_label">Please input your primary password</string>
+    <string name="dialog_wrong_password_message">Wrong password</string>
+
 </resources>

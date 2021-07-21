@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="buttonStyle">@style/AppTheme.Button</item>
         <item name="editTextStyle">@style/AppTheme.InputText</item>
+        <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
@@ -17,9 +18,24 @@
         <item name="android:textColor">@color/selector_edit_text_color</item>
     </style>
 
+    <!-- Dialog style -->
+    <style name="AppTheme.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">#f00</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
     <!-- Text style -->
     <style name="ClickableText">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:padding">5dp</item>
     </style>
+
 </resources>

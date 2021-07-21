@@ -61,6 +61,10 @@ class PasswordListFragment : BaseFragment<FragmentPasswordListBinding>() {
         binding.menuItemAddPassword.setOnClickListener {
             findNavController().navigate(R.id.action_passwordListFragment_to_addPasswordFragment)
         }
+
+        binding.menuItemSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_passwordListFragment_to_settingFragment)
+        }
     }
 
 }

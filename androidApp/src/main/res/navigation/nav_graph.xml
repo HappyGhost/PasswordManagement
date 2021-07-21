@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_passwordListFragment_to_passwordDetailFragment"
             app:destination="@id/passwordDetailFragment" />
+        <action
+            android:id="@+id/action_passwordListFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPasswordFragment"
@@ -25,5 +28,11 @@
     <fragment
         android:id="@+id/passwordDetailFragment"
         android:name="com.myapp.pm.features.detail.PasswordDetailFragment"
-        android:label="PasswordDetailFragment" />
+        android:label="PasswordDetailFragment"
+        tools:layout="@layout/fragment_detail"/>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.myapp.pm.features.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
 </navigation>
