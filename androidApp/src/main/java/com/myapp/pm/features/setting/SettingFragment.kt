@@ -73,10 +73,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         showHiddenPrimaryPassword()
     }
 
-    private fun getPrimaryPassword(): String {
-        return shareReference?.getString(Constant.KEY_PRIMARY_PASSWORD, "") ?: ""
-    }
-
     private fun showHiddenPrimaryPassword() {
         val hiddenPassword = "*".repeat(getPrimaryPassword().length)
         binding.edtPrimaryPassword.setText(hiddenPassword)
