@@ -10,6 +10,7 @@ import com.myapp.pm.R
 import com.myapp.pm.core.BaseFragment
 import com.myapp.pm.databinding.FragmentDetailBinding
 import com.myapp.pm.features.SharedViewModel
+import com.myapp.pm.features.dialog.ConfirmPasswordDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -23,6 +24,9 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val detailViewModel: PasswordDetailViewModel by viewModel()
     private var displayMode = DisplayMode.DETAIL_MODE
+    private val confirmPasswordDialog: ConfirmPasswordDialog by lazy {
+        ConfirmPasswordDialog(appCompatActivity)
+    }
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
@@ -74,13 +78,23 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
             )
         }
         binding.imgShowPassword.setOnClickListener {
-            it.isSelected = !it.isSelected
-            if (it.isSelected) {
-                binding.edtPassword.transformationMethod = null
+            if (!it.isSelected && getPrimaryPassword().isNotEmpty()) {
+                confirmPasswordDialog.show {
+                    showPassword(!it.isSelected, it)
+                }
             } else {
-                binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+                showPassword(!it.isSelected, it)
             }
         }
+    }
+
+    private fun showPassword(shouldDisplay: Boolean, view: View) {
+        if (shouldDisplay) {
+            binding.edtPassword.transformationMethod = null
+        } else {
+            binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+        }
+        view.isSelected = shouldDisplay
     }
 
     private fun showPasswordInfoFromShareModel() {

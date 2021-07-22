@@ -46,6 +46,10 @@ abstract class BaseFragment<T: ViewBinding>: Fragment() {
         super.onDestroyView()
     }
 
+    fun getPrimaryPassword(): String {
+        return shareReference?.getString(Constant.KEY_PRIMARY_PASSWORD, "") ?: ""
+    }
+
     fun showSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = appCompatActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
