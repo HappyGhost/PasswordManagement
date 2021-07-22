@@ -58,10 +58,10 @@ class AddPasswordFragment : Fragment() {
                 )
             ) {
                 _viewModel.addPassword(
-                    binding.tvAccountName.text.toString(),
-                    binding.tvUsername.text.toString(),
-                    binding.tvPassword.text.toString(),
-                    binding.tvHint.text.toString()
+                    binding.edtAccountName.text.toString(),
+                    binding.edtUsername.text.toString(),
+                    binding.edtPassword.text.toString(),
+                    binding.edtHint.text.toString()
                 )
             }
         }

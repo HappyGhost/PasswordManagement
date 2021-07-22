@@ -17,7 +17,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("androidx.biometric:biometric:1.2.0-alpha03")
+    implementation("com.google.android.material:material:1.4.0")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
 
