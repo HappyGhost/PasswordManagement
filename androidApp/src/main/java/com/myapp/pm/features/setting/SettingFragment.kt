@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.myapp.pm.R
 import com.myapp.pm.core.BaseFragment
 import com.myapp.pm.core.Constant
 import com.myapp.pm.databinding.FragmentSettingBinding
 import com.myapp.pm.features.dialog.ConfirmPasswordDialog
+import com.myapp.pm.features.dialog.FingerPrintAuthenticateListener
+import com.myapp.pm.features.dialog.FingerPrintDialog
+import com.myapp.pm.features.util.FingerPrint.NOT_AVAILABLE
+import com.myapp.pm.features.util.FingerPrintUtil
 
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
@@ -17,7 +22,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         ConfirmPasswordDialog(appCompatActivity)
     }
 
-    private var forceChange: Boolean = false
+    private val fingerPrintDialog: FingerPrintDialog by lazy {
+        FingerPrintDialog(appCompatActivity)
+    }
+
+    private var forceSecurityChange: Boolean = false
+    private var forceFingerPrintChange: Boolean = false
 
     override fun setupViewBinding(
         inflater: LayoutInflater,
@@ -36,18 +46,53 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     private fun initView() {
         shareReference?.run {
             binding.switchSecurityCheck.isChecked = getBoolean(Constant.KEY_SECURITY_CHECK, false)
+            binding.switchFingerPrintCheck.isChecked = getBoolean(Constant.KEY_FINGER_PRINT_CHECK, false)
         }
 
+        initSecurityCheckBehavior()
+        initFingerPrintSettingBehavior()
+    }
+
+    private fun initFingerPrintSettingBehavior() {
+        if (FingerPrintUtil.checkFingerPrintAvaialble(appCompatActivity) == NOT_AVAILABLE) {
+            binding.clFingerPrint.visibility = View.GONE
+        } else {
+            binding.clFingerPrint.visibility = View.VISIBLE
+            binding.switchFingerPrintCheck.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (!forceFingerPrintChange && !isChecked) {
+                    buttonView.isChecked = true
+                    fingerPrintDialog.listener = object : FingerPrintAuthenticateListener {
+                        override fun onAuthenticationSucceeded() {
+                            forceFingerPrintChange = true
+                            buttonView.isChecked = false
+                            saveFingerSetting(false)
+                        }
+
+                        override fun onAuthenticationFailed(errorCode: Int, errorString: String) {
+                            Toast.makeText(activity, errorString, Toast.LENGTH_LONG).show()
+                        }
+
+                    }
+                    fingerPrintDialog.show()
+                } else {
+                    forceFingerPrintChange = false
+                    saveFingerSetting(isChecked)
+                }
+            }
+        }
+    }
+
+    private fun initSecurityCheckBehavior() {
         binding.switchSecurityCheck.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (!forceChange && getPrimaryPassword().isNotEmpty() && !isChecked) {
+            if (!forceSecurityChange && getPrimaryPassword().isNotEmpty() && !isChecked) {
                 buttonView.isChecked = true
                 confirmDialog.show {
-                    forceChange = true
+                    forceSecurityChange = true
                     buttonView.isChecked = false
                     saveSecurityCheck(false)
                 }
             } else {
-                forceChange = false
+                forceSecurityChange = false
                 saveSecurityCheck(isChecked)
             }
         }
@@ -93,7 +138,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         showHiddenPrimaryPassword()
     }
 
-    private fun saveSecurityCheck(isCheck: Boolean){
+    private fun saveSecurityCheck(isCheck: Boolean) {
         shareReference?.edit()?.putBoolean(Constant.KEY_SECURITY_CHECK, isCheck)?.apply()
+    }
+
+    private fun saveFingerSetting(isCheck: Boolean) {
+        shareReference?.edit()?.putBoolean(Constant.KEY_FINGER_PRINT_CHECK, isCheck)?.apply()
     }
 }
