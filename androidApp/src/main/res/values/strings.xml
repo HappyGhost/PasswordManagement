@@ -33,7 +33,7 @@
 
     <!-- Confirm Dialog -->
     <string name="dialog_confirm_primary_password_hint">Primary Password</string>
-    <string name="dialog_confirm_label">Please input your primary password</string>
+    <string name="dialog_confirm_label">Authentication required</string>
     <string name="dialog_wrong_password_message">Wrong password</string>
     <string name="setting_finger_print_check_title">Enable finger print</string>
     <string name="setting_finger_print_check_description">You will be asked to authenticate by finger print when you want to view password.</string>

@@ -11,7 +11,8 @@
     <dimen name="spacing_item_left_right">10dp</dimen>
     <dimen name="spacing_content_left_right">16dp</dimen>
     <dimen name="spacing_between_inputs">10dp</dimen>
-    <dimen name="spacing_dialog_padding">10dp</dimen>
+    <dimen name="spacing_dialog_padding">20dp</dimen>
+    <dimen name="spacing_dialog_content_margin_top">20dp</dimen>
 
     <!-- item password -->
     <dimen name="item_password_layout_height">110dp</dimen>
