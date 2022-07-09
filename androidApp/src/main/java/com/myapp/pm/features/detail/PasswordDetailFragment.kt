@@ -8,9 +8,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.myapp.pm.R
 import com.myapp.pm.core.BaseFragment
+import com.myapp.pm.core.Constant
 import com.myapp.pm.databinding.FragmentDetailBinding
 import com.myapp.pm.features.SharedViewModel
 import com.myapp.pm.features.dialog.ConfirmPasswordDialog
+import com.myapp.pm.features.dialog.FingerPrintAuthenticateListener
+import com.myapp.pm.features.dialog.FingerPrintDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -26,6 +29,16 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
     private var displayMode = DisplayMode.DETAIL_MODE
     private val confirmPasswordDialog: ConfirmPasswordDialog by lazy {
         ConfirmPasswordDialog(appCompatActivity)
+    }
+    private val fingerPrintDialog: FingerPrintDialog by lazy {
+        FingerPrintDialog(appCompatActivity)
+    }
+
+    private val securityCheck: Boolean by lazy {
+        shareReference!!.getBoolean(Constant.KEY_SECURITY_CHECK, false)
+    }
+    private val fingerPrintCheck: Boolean by lazy {
+        shareReference!!.getBoolean(Constant.KEY_FINGER_PRINT_CHECK, false)
     }
 
     override fun setupViewBinding(
@@ -78,8 +91,22 @@ class PasswordDetailFragment : BaseFragment<FragmentDetailBinding>() {
             )
         }
         binding.imgShowPassword.setOnClickListener {
-            if (!it.isSelected && getPrimaryPassword().isNotEmpty()) {
-                confirmPasswordDialog.show {
+            if (!it.isSelected) {
+                if (fingerPrintCheck) {
+                    fingerPrintDialog.listener = object: FingerPrintAuthenticateListener{
+                        override fun onAuthenticationSucceeded() {
+                            showPassword(!it.isSelected, it)
+                        }
+
+                        override fun onAuthenticationFailed(errorCode: Int, errorString: String) {
+                        }
+                    }
+                    fingerPrintDialog.show()
+                } else if (securityCheck && getPrimaryPassword().isNotEmpty()) {
+                    confirmPasswordDialog.show {
+                        showPassword(!it.isSelected, it)
+                    }
+                } else {
                     showPassword(!it.isSelected, it)
                 }
             } else {
